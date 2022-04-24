@@ -1,11 +1,9 @@
 #pragma once
 
 #include <iostream>
-
 #include <vector>
 
 #include <string>
-#include <string_view>
 
 #include <initializer_list>
 
@@ -23,7 +21,7 @@ namespace alp
     /// <summary>
     /// The purpose of having yet another printing
     /// statement is that this one automatically starts a new line,
-    /// making the user type less, but this funcion uses '\n', instead of 'std::endl'
+    /// making the user type less, but this method uses '\n', instead of 'std::endl'
     /// meaning that this will not flush the output buffer everytime it is called.
     /// </summary>
     /// \tparam T
