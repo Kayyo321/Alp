@@ -23,7 +23,7 @@ void StatementDemonstration()
 
     // Using the 'Check' method to check if two parameters are equal.
     // 0: false. 1: true.
-    boolean = Check(0, 1);
+    boolean = Check("foo", "bar");
 
     if (boolean == 1)
     {
