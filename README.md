@@ -8,7 +8,7 @@ to notify me!
 # What Even Is An Alp?
 
 1. Definitions from the Oxford dictionary state that an 'alp' (noun) is... "a high mountain, especially a snowcapped one."
-2. Alp is an extension to C++, with sprinkles in a few features that I found I wanted.
+2. Alp is an extension to C++, which sprinkles in a few features that I found I wanted.
 
 These include...
 * A new String class ([Check this example out](Examples/String.c++) if you would like to know more)
