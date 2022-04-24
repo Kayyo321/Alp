@@ -8,7 +8,7 @@ using namespace alp;
 void IntegerDemonstration()
 {
     Int integer { Int(20) }; // InitialValue. <const>
-    integer.value = 100;           // Value.
+    integer.value = 100;     // Value.
 
     // Printing out the current value of 'integer', and the initialized one.
     Println("the 'integer' variables current value is       : ", integer.value);
