@@ -10,7 +10,7 @@ to notify me!
 1. Definitions from the Oxford dictionary state that an 'alp' (noun) is... "a high mountain, especially a snowcapped one."
 2. Alp is an extension to C++, which sprinkles in a few features that I found I wanted.
 
-These include...
+These include (but are not limited to)...
 * A new String class ([Check this example out](Examples/String.c++) if you would like to know more)
 * A new Int class ([Check this other example out](Examples/Int.c++) if you would like to know more)
 * And more statements to cry over ([Check this other other example out](Examples/Statements.c++) if you would like to know more)
