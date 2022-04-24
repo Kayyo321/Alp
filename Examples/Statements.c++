@@ -41,4 +41,12 @@ void StatementDemonstration()
     // Print's out 'Hello World!' using the 'PrintASCII' method, because that is
     // the string conversion of the ASCII value : '72101108108111328711111410810033'.
     PrintASCII("72101108108111328711111410810033");
+
+    // Using the 'StringIsDigit' method, we check if a string is of numeric value.
+    // (Will return false);
+    Println(StringIsDigit("Hi"));
+
+    // Using the 'StringIsAlpha' method, we check if a string is of alphabetical value.
+    // (Will return true);
+    Println(StringIsAlpha("Hi"));
 }
