@@ -33,4 +33,12 @@ void StatementDemonstration()
     {
         Println("False! (", boolean, ")");
     }
+
+    // Print's out '72101108108111328711111410810033' using the 'PrintASCII'
+    // method, because that is the ASCII value of 'Hello World!'.
+    PrintASCII("Hello World!");
+
+    // Print's out 'Hello World!' using the 'PrintASCII' method, because that is
+    // the string conversion of the ASCII value : '72101108108111328711111410810033'.
+    PrintASCII("72101108108111328711111410810033");
 }
