@@ -7,7 +7,7 @@ to notify me!
 
 # What Even Is An Alp?
 
-1. How should I know?
+1. Definitions from the Oxford dictionary state that an 'alp' (noun) is... "a high mountain, especially a snowcapped one."
 2. Alp is an extension to C++, which sprinkles in a few features that I found I wanted.
 
 These include...
