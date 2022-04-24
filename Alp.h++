@@ -7,32 +7,6 @@
 
 #include <initializer_list>
 
-// Function to print the character sequence
-// for the given ASCII sentence
-// (https://www.geeksforgeeks.org/convert-the-ascii-value-sentence-to-its-equivalent-string/)
-void ASCIIToSentence(std::string str)
-{
-    int len = str.length();
-    int num = 0;
-
-    for (int i = 0; i < len; i++)
-    {
-        // Append the current digit
-        num = num * 10 + (str[i] - '0');
-
-        // If num is within the required range
-        if (num >= 32 && num <= 122)
-        {
-            // Convert num to char
-            char ch = (char)num;
-            std::cout << ch;
-
-            // Reset num to 0
-            num = 0;
-        }
-    }
-}
-
 namespace alp
 {
     // --== Statements ==--
@@ -104,16 +78,25 @@ namespace alp
     {
         try
         {
-            if (!StringIsDigit(str))
+            for (int i { 0 }; i < str.length(); ++i)
             {
-                for (char c : str)
+                if (std::isdigit(str[i]))
                 {
-                    std::cout << (int)c;
+                    std::cout << (int)str[i];
                 }
-            }
-            else
-            {
-                ASCIIToSentence(str);
+                else
+                {
+                    // If num is within the required range
+                    if (str[i] >= 32 && str[i] <= 122)
+                    {
+                        // Convert num to char
+                        char ch = (char)str[i];
+                        std::cout << ch;
+
+                        // Reset num to 0
+                        str[i] = 0;
+                    }
+                }
             }
         }
         catch (std::exception e)
