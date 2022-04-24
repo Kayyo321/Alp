@@ -11,7 +11,7 @@ using namespace alp;
 void StringDemonstration()
 {
     String string { String("There") }; // initialValue. <const>
-    string.value = "Hi";                     // value.
+    string.value = "Hi";               // value.
 
     // Print's out 'Hi There' using the 'Println' method.
     Println(string.value, " ", string.initialValue);
