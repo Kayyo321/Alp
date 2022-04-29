@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-#include "../Alp.h++"
+#include "../Alp/Alp.h++"
 
 using namespace alp;
 

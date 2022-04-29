@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <utility>
 #include <vector>
 
 #include <string>
@@ -9,9 +10,9 @@
 
 namespace alp
 {
-    // --== Statements ==--
-    // https://stackoverflow.com/questions/1657883/variable-number-of-arguments-in-c
+    //region --== Statements ==--
 
+    //region Println
     template<typename T>
     void Println(T t)
     {
@@ -31,7 +32,7 @@ namespace alp
     /// \param t
     /// \param args
     template<typename T, typename... Args>
-    void Println(T t, Args... args) // Recursive variadic function.
+    void Println(T t, Args... args)
     {
         std::cout << t;
 
@@ -39,22 +40,36 @@ namespace alp
 
         std::cout << '\n';
     }
+    //endregion
 
-    bool StringIsAlpha(std::string str)
+    //region PrintASCII
+    /// <summary>
+    /// This method print's out the ascii values of the provided string.
+    /// </summary>
+    /// \tparam std::string
+    void PrintASCII(std::string str)
     {
-        bool isAlpha { true };
-
-        for (int i { 0 }; i < str.length(); ++i)
+        try
         {
-            if (!std::isalpha(str[i]) && str[i] != ' ')
+            std::vector<std::string> intStack { "" };
+
+            for (int i { 0 }; i < str.length(); ++i)
             {
-                if (isAlpha) { isAlpha = false; }
+                std::cout << (int)str[i];
             }
         }
+        catch (std::exception e)
+        {
+            std::string throwErr { "Incorrect parameters for 'PrintASCII'. Make sure the data type is alphabetical.\nExited with the message... '" };
 
-        return isAlpha;
+            throwErr += e.what();
+            throwErr += '\'';
+
+            throw std::runtime_error(throwErr);
+        }
+
+        std::cout << '\n';
     }
-
     bool StringIsDigit(std::string str)
     {
         bool isDigit { true };
@@ -70,44 +85,26 @@ namespace alp
         return isDigit;
     }
 
-    /// <summary>
-    /// This method print's out the ascii values of the provided string.
-    /// </summary>
-    /// \tparam std::string
-    void PrintASCII(std::string str)
-    {
-        try
-        {
-            for (int i { 0 }; i < str.length(); ++i)
-            {
-                if (std::isdigit(str[i]))
-                {
-                    std::cout << (int)str[i];
-                }
-                else
-                {
-                    // If num is within the required range
-                    if (str[i] >= 32 && str[i] <= 122)
-                    {
-                        // Convert num to char
-                        char ch = (char)str[i];
-                        std::cout << ch;
+    //endregion
 
-                        // Reset num to 0
-                        str[i] = 0;
-                    }
-                }
+    //region StringIsAlpha && StringIsDigit
+    bool StringIsAlpha(std::string str)
+    {
+        bool isAlpha { true };
+
+        for (int i { 0 }; i < str.length(); ++i)
+        {
+            if (!std::isalpha(str[i]) && str[i] != ' ')
+            {
+                if (isAlpha) { isAlpha = false; }
             }
         }
-        catch (std::exception e)
-        {
-            std::string throwErr { "Incorrect parameters for 'PrintASCII'. Make sure the data type is alphabetical." };
-            throw std::runtime_error(throwErr);
-        }
 
-        std::cout << '\n';
+        return isAlpha;
     }
+    //endregion
 
+    //region GetInput
     std::string GetInput()
     {
         std::string toReturn { "" };
@@ -115,7 +112,9 @@ namespace alp
 
         return toReturn;
     }
+    //endregion
 
+    //region Check
     /// <summary>
     /// Returns a boolean stating weather the first and the
     /// second parameter are equal.
@@ -136,8 +135,10 @@ namespace alp
 
         return boolean;
     }
+    //endregion
+    //endregion
 
-    // --== Data Types ==--
+    //region --== Data Types ==--
 
     /// <summary>
     /// The reason to create this data type is to add an automatic
@@ -148,14 +149,14 @@ namespace alp
     class String
     {
     public:
-        std::string value { "" };
-        const std::string initialValue { "" };
+        std::string value;
+        const std::string initialValue;
 
         const std::string *location { &value };
 
-        String(std::string initVal)
+        explicit String(std::string initVal)
         {
-            value = initVal;
+            value = std::move(initVal);
 
             std::string *ptr;
             ptr = (std::string*)(&initialValue);
@@ -206,11 +207,11 @@ namespace alp
     {
     public:
         int value { 0 };
-        int initialValue { 0 };
+        const int initialValue { 0 };
 
         const int *location { &value };
 
-        Int(int initVal)
+        explicit Int(int initVal)
         {
             value = initVal;
 
@@ -221,10 +222,11 @@ namespace alp
 
         /// Returns a string value of the int.
         /// \return
-        std::string MakeString()
+        [[nodiscard]] std::string MakeString() const
         {
             std::string str { std::to_string(value) };
             return str;
         }
     };
+    //endregion
 }
