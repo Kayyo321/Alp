@@ -157,6 +157,7 @@ namespace alp
 
     //region --== Data Types ==--
 
+    //region String
     /// <summary>
     /// The reason to create this data type is to add an automatic
     /// const to the variable (which holds the initial value), and add more modern functionality
@@ -219,7 +220,9 @@ namespace alp
             return toReturn;
         }
     };
+    //endregion
 
+    //region Int
     class Int
     {
     public:
@@ -245,5 +248,6 @@ namespace alp
             return str;
         }
     };
+    //endregion
     //endregion
 }
