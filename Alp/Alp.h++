@@ -131,6 +131,28 @@ namespace alp
         return boolean;
     }
     //endregion
+
+    //region SpliceString
+    /// <summary>
+    /// This function returns a vector of strings that contain strings that you chose to splice between
+    /// </summary>
+    /// \param str
+    /// \param find
+    /// \return
+    std::vector<std::string> SpliceString(std::string str, char find)
+    {
+        std::vector<std::string> output;
+        std::string temp;
+
+        for (char c: str)
+        {
+            if (c == find) {output.push_back(temp); temp.erase();}
+            else {temp += c;}
+        }
+
+        return output;
+    }
+    //endregion
     //endregion
 
     //region --== Data Types ==--
