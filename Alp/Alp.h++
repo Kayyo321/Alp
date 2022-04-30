@@ -109,29 +109,6 @@ namespace alp
     }
     //endregion
 
-    //region Check
-    /// <summary>
-    /// Returns a boolean stating weather the first and the
-    /// second parameter are equal.
-    /// </summary>
-    bool Check(auto x, auto y)
-    {
-        bool boolean;
-
-        try
-        {
-            if (x == y) { boolean = true; }
-            else { boolean = false; }
-        }
-        catch (const bool e)
-        {
-            std::cerr << "Error checking '" << x << "', and '" << y << "'. Error exited with the message '" << e << "'." << std::endl;
-        }
-
-        return boolean;
-    }
-    //endregion
-
     //region SpliceString
     /// <summary>
     /// This function returns a vector of strings that contain strings that you chose to splice between

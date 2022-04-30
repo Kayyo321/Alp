@@ -22,22 +22,6 @@ void StatementDemonstration()
     str.value = GetInput();
     //endregion
 
-    //region Check
-    int boolean { 0 };
-
-    // Using the 'Check' method to check if two parameters are equal.
-    boolean = Check("foo", "bar");
-
-    if (boolean == 1)
-    {
-        Println("True! (", boolean, ")");
-    }
-    else if (boolean == 0)
-    {
-        Println("False! (", boolean, ")");
-    }
-    //endregion
-
     //region PrintASCII
     // Print's out '72101108108111328711111410810033' using the 'PrintASCII'
     // method, because that is the ASCII value of 'Hello World!'.
