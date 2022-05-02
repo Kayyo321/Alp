@@ -47,8 +47,6 @@ namespace alp
     {
         try
         {
-            std::vector<std::string> intStack { "" };
-
             for (int i { 0 }; i < str.length(); ++i)
             {
                 std::cout << (int)str[i];
