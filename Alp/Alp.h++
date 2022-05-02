@@ -144,7 +144,7 @@ namespace alp
         std::string value;
         const std::string initialValue;
 
-        [[maybe_unused]] const std::string *location { &value };
+        const std::string *location { &value };
 
         [[maybe_unused]] explicit String(std::string initVal)
         {
@@ -203,7 +203,7 @@ namespace alp
         int value { 0 };
         const int initialValue { 0 };
 
-        [[maybe_unused]] const int *location { &value };
+        const int *location { &value };
 
         [[maybe_unused]] explicit Int(int initVal)
         {
