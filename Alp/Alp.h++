@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <string>
 #include <vector>
 
 namespace alp
@@ -9,7 +10,7 @@ namespace alp
 
     //region Println
     template<typename T>
-    void Println(T t)
+    [[maybe_unused]] void Println(T t)
     {
         std::cout << t;
 
@@ -42,7 +43,7 @@ namespace alp
     /// This method print's out the ascii values of the provided string.
     /// </summary>
     /// \tparam std::string
-    void PrintASCII(std::string str)
+    [[maybe_unused]] void PrintASCII(std::string str)
     {
         try
         {
@@ -53,19 +54,15 @@ namespace alp
                 std::cout << (int)str[i];
             }
         }
-        catch (std::exception e)
+        catch (...)
         {
-            std::string throwErr { "Incorrect parameters for 'PrintASCII'. Make sure the data type is alphabetical.\nExited with the message... '" };
-
-            throwErr += e.what();
-            throwErr += '\'';
-
-            throw std::runtime_error(throwErr);
+            throw std::runtime_error("Incorrect parameters for 'PrintASCII'");
         }
 
         std::cout << '\n';
     }
-    bool StringIsDigit(std::string str)
+
+    [[maybe_unused]] bool StringIsDigit(std::string str)
     {
         bool isDigit { true };
 
@@ -83,7 +80,7 @@ namespace alp
     //endregion
 
     //region StringIsAlpha && StringIsDigit
-    bool StringIsAlpha(std::string str)
+    [[maybe_unused]] bool StringIsAlpha(std::string str)
     {
         bool isAlpha { true };
 
@@ -100,9 +97,9 @@ namespace alp
     //endregion
 
     //region GetInput
-    std::string GetInput()
+    [[maybe_unused]] std::string GetInput()
     {
-        std::string toReturn { "" };
+        std::string toReturn;
         std::getline(std::cin, toReturn); // Gets the user's input.
 
         return toReturn;
@@ -116,7 +113,7 @@ namespace alp
     /// \param str
     /// \param find
     /// \return
-    std::vector<std::string> SpliceString(std::string str, char find)
+    [[maybe_unused]] std::vector<std::string> SpliceString(const std::string& str, char find)
     {
         std::vector<std::string> output;
         std::string temp;
@@ -141,15 +138,15 @@ namespace alp
     /// such as 'ToCharVector' instead of 'ToCharArray', to use endorse
     /// more modern C++ functionality.
     /// </summary>
-    class String
+    class [[maybe_unused]] String
     {
     public:
         std::string value;
         const std::string initialValue;
 
-        const std::string *location { &value };
+        [[maybe_unused]] const std::string *location { &value };
 
-        explicit String(std::string initVal)
+        [[maybe_unused]] explicit String(std::string initVal)
         {
             value = std::move(initVal);
 
@@ -165,7 +162,7 @@ namespace alp
         /// \param str
         /// \param find
         /// \return
-        int FindIndexOf(char find)
+        [[maybe_unused]] int FindIndexOf(char find)
         {
             int index { 0 };
 
@@ -185,7 +182,7 @@ namespace alp
         /// </summary>
         /// \param str
         /// \return
-        std::vector<char> ToCharVector()
+        [[maybe_unused]] std::vector<char> ToCharVector()
         {
             std::vector<char> toReturn;
 
@@ -200,15 +197,15 @@ namespace alp
     //endregion
 
     //region Int
-    class Int
+    class [[maybe_unused]] Int
     {
     public:
         int value { 0 };
         const int initialValue { 0 };
 
-        const int *location { &value };
+        [[maybe_unused]] const int *location { &value };
 
-        explicit Int(int initVal)
+        [[maybe_unused]] explicit Int(int initVal)
         {
             value = initVal;
 
@@ -219,10 +216,59 @@ namespace alp
 
         /// Returns a string value of the int.
         /// \return
-        [[nodiscard]] std::string MakeString() const
+        [[maybe_unused]] [[nodiscard]] std::string MakeString() const
         {
             std::string str { std::to_string(value) };
             return str;
+        }
+    };
+    //endregion
+
+    //region Pointer
+    /// <summary>
+    /// This class holds pointer data such as location, value, and even a vector, named 'pastLocations',
+    /// which could potentially prevent memory leaks, since the past locations are stored automatically
+    /// whenever the 'Locate' method is called.
+    /// </summary>
+    /// \tparam T
+    template<class T>
+    class Pointer
+    {
+    public:
+        std::vector<T*> pastLocations {};
+
+        T *location {nullptr};
+        T value {};
+
+        explicit Pointer(T *t)
+        {
+            location = t;
+            value    = *location;
+        }
+
+        void Locate(T *t)
+        {
+            pastLocations.push_back(location);
+
+            location = t;
+            value    = *location;
+        }
+
+        void Log([[maybe_unused]] std::vector<T*> past)
+        {
+            std::cout << "(" << std::endl;
+
+            for ([[maybe_unused]] auto a: past)
+            {
+                std::cout << " {" << a << "}" << std::endl;
+            }
+
+            std::cout << ")" << std::endl;
+        }
+
+        void Log()
+        {
+            std::cout << "{" << location << "} : '" << value << "'." << std::endl;
         }
     };
     //endregion
