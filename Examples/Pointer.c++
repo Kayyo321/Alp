@@ -26,9 +26,11 @@ int main()
 
     pointer.Log();
 
+    // Using the 'Migrate' method, it does the same thing as-
+    // -'Locate', it just sounds better in my opinion.
     // (BASED ON MY SYSTEM)
     // (Will return "{0x7f21fff824} : '30'.")
-    pointer.Locate(&integer2);
+    pointer.Migrate(&integer2);
 
     // Using the overloaded 'Log' method, we print all the-
     // -pointers past locations. (Not including the current one.)
