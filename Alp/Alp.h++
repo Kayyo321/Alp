@@ -244,13 +244,8 @@ namespace alp
             value    = *location;
         }
 
-        void Locate(T *t)
-        {
-            pastLocations.push_back(location);
-
-            location = t;
-            value    = *location;
-        }
+        void Migrate(T *t);
+        void Locate(T *t);
 
         void Log([[maybe_unused]] std::vector<T*> past)
         {
@@ -269,6 +264,24 @@ namespace alp
             std::cout << "{" << location << "} : '" << value << "'." << std::endl;
         }
     };
+
+    template<class T>
+    void Pointer<T>::Migrate(T *t)
+    {
+        pastLocations.push_back(location);
+
+        location = t;
+        value    = *location;
+    }
+
+    template<class T>
+    void Pointer<T>::Locate(T *t)
+    {
+        pastLocations.push_back(location);
+
+        location = t;
+        value    = *location;
+    }
     //endregion
     //endregion
 }
