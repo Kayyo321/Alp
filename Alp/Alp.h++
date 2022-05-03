@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <utility>
 #include <vector>
 
 namespace alp
@@ -139,18 +140,46 @@ namespace alp
     class [[maybe_unused]] String
     {
     public:
-        std::string value;
-        const std::string initialValue;
+        std::string value {};
+        std::string *pValue {};
+        const std::string intitialValue;
 
-        const std::string *location { &value };
-
-        [[maybe_unused]] explicit String(std::string initVal)
+        [[maybe_unused]] explicit String()
+            : pValue {nullptr}
         {
-            value = std::move(initVal);
+            pValue = new std::string(1, '\0');
 
             std::string *ptr;
-            ptr = (std::string*)(&initialValue);
-            *ptr = value;
+            ptr = (std::string*)(&intitialValue);
+            *ptr = *pValue;
+
+            value = *pValue;
+        }
+
+        [[maybe_unused]] explicit String(std::string initVal)
+            : pValue {nullptr}
+        {
+            pValue = new std::string(initVal.length(), ' ');
+            *pValue = std::move(initVal);
+
+            std::string *ptr;
+            ptr = (std::string*)(&intitialValue);
+            *ptr = *pValue;
+
+            value = *pValue;
+        }
+
+        ~String()
+        {
+            delete pValue;
+        }
+
+        const std::string *location {pValue};
+
+        void Assign(std::string newVal)
+        {
+            *pValue = std::move(newVal);
+            value = *pValue;
         }
 
         /// <summary>
@@ -160,13 +189,13 @@ namespace alp
         /// \param str
         /// \param find
         /// \return
-        [[maybe_unused]] int FindIndexOf(char find)
+        [[maybe_unused]] int FindIndexOf(char find) const
         {
             int index { 0 };
 
-            for (int i { 0 }; i < value.length(); ++i)
+            for (int i { 0 }; i < (*pValue).length(); ++i)
             {
-                if (value[i] == find)
+                if ((*pValue)[i] == find)
                 {
                     index = i;
                 }
@@ -180,11 +209,11 @@ namespace alp
         /// </summary>
         /// \param str
         /// \return
-        [[maybe_unused]] std::vector<char> ToCharVector()
+        [[maybe_unused]] std::vector<char> ToCharVector() const
         {
             std::vector<char> toReturn;
 
-            for (char c : value)
+            for (char c : *pValue)
             {
                 toReturn.push_back(c);
             }
